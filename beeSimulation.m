@@ -53,8 +53,8 @@ function [posD, posA, vel] = beeSimulation(posD, posA, vel, T, draw)
     %     quiver(x,y,cos(vel),sin(vel));
     %     quiver(x,y,cos(random_angle),sin(random_angle),'--');
     %     quiver(x,y,cos(phi_temp),sin(phi_temp),'--');
-        scatter(-casu_pos,0,'x');
-        scatter(casu_pos,0,'x');
+        scatter(-casu_pos,0,[],'b','x');
+        scatter(casu_pos,0,[],'b','x');
         hold off
         axis([-10,10,-10,10])
 

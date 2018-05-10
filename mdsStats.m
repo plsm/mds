@@ -28,55 +28,61 @@ incorrect = 0;
 subopt = 0;
 suboptStats = []; 
 
+draw = 0
+
 figure();
 % iGraph = 6;
-for iGraph = 1 : 7
+for iGraph = 8 : 8
     rho = 0.85;
     [N, mds] = chooseGraph(iGraph);
     n = 300;
-    iter = 1;
+    iter = 100;
     correct = 0;
     incorrect = 0;
     subopt = 0;
-    
-    figure(1)
-    subplot(4,2,iGraph)
-    plot(graph(N));
+    if draw
+      figure(1)
+      subplot(4,2,iGraph)
+    end
+    %plot(graph(N));
     N
     title(num2str(iGraph))
-        
-for iRho = 0 : 0
-    suboptStats = []; 
-    for i = 1 : iter
-        [vec, pStat] = simulateDomsetBees(N,n,rho);
+    for iRho = 0 : 0
+        suboptStats = []; 
+        for i = 1 : iter
+            [vec, pStat] = simulateDomsetBees(N,n,rho);
 
-        [cor, sub, inc] = calculateStats(vec, N, mds);
-%         if cor > 0
-%             result = vec(end,:) > 35
-%         end
+            [cor, sub, inc] = calculateStats(vec, N, mds);
+    %         if cor > 0
+    %             result = vec(end,:) > 35
+    %         end
 
-        correct = correct + (cor > 0);
-        subopt = subopt + (sub > 0);
-        incorrect = incorrect + (inc > 0);
-        if sub > 0
-            suboptStats(subopt) = (sub - 1);
+            correct = correct + (cor > 0);
+            subopt = subopt + (sub > 0);
+            incorrect = incorrect + (inc > 0);
+            if sub > 0
+                suboptStats(subopt) = (sub - 1);
+            end
+
+    % 
+            if draw
+              figure();
+              n = length(vec);
+              for c = 1 : length(N)
+                  subplot(length(N),1,c)
+                  scatter(linspace(1,n,n), vec(:,c),  [],  col{c}, '.')
+                  axis([1, n, 26, 36])
+              end
+            end
         end
-
-% 
-        figure();
-        n = length(vec);
-        for c = 1 : length(N)
-            subplot(length(N),1,c)
-            scatter(linspace(1,n,n), vec(:,c), '.', 'markeredgecolor', col{c});
-            axis([1, n, 26, 36])
+        disp(strcat('graph: ', num2str(iGraph), ', rho = ', num2str(rho)));
+        disp(strcat('cor:',num2str(correct),',so:',num2str(subopt),',inc:',num2str(incorrect)))
+        if subopt > 0
+            disp(strcat('mean: ',num2str(mean(suboptStats)), ', var: ', num2str(var(suboptStats))))
         end
+        disp('--------------------------------')
+
     end
-    disp(strcat('graph: ', num2str(iGraph), ', rho = ', num2str(rho)));
-    disp(strcat('cor:',num2str(correct),',so:',num2str(subopt),',inc:',num2str(incorrect)))
-    disp(strcat('mean: ',num2str(mean(suboptStats)), ', var: ', num2str(var(suboptStats))))
-    disp('--------------------------------')
-
-end
 end
 % title(strcat('graph ',num2str(iGraph)));
 % f = figure();

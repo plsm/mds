@@ -52,7 +52,16 @@ switch i
             0 0 1 0 0 0 0 0 0 0;
             0 0 0 1 0 0 0 0 0 0];
         mds = 3;
+    case 8
+        N = [
+          0 1 0 0 0 0;
+          1 0 1 0 0 1;
+          0 1 0 1 1 0;
+          0 0 1 0 0 0;
+          0 0 1 0 0 0;
+          0 1 0 0 0 0
+         ];
+        mds = 2;
     otherwise
         disp('no graph chosen');
-
 end

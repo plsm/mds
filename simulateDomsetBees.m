@@ -2,6 +2,7 @@ function [vec, pInt] = simulateDomsetBees(N,varargin)
 
 %% initialize
 global casu_pos
+casu_pos = 4.5;
 numvarargs = length(varargin);
 
 if numvarargs > 3
@@ -127,8 +128,16 @@ for i = 1 : n
         avgP(iNode) = mean(P(iNode, N(iNode, :)==1));
     end
     
-    progress_smooth_heat = 1 - exp(0.17 * (1 - 1 / (1 - min(1, 3 * i / n ))));
-    progress_smooth_cool = 1 - exp(0.85 * (1 - 1 / (1 - min(1, 2 * i / n))));
+    if 3 * i / n >= 1
+      progress_smooth_heat = 1;
+    else
+      progress_smooth_heat = 1 - exp(0.17 * (1 - 1 / (1 - min(1, 3 * i / n ))));
+    end
+    if 2 * i / n >= 1
+      progress_smooth_cool = 1;
+    else
+      progress_smooth_cool = 1 - exp(0.85 * (1 - 1 / (1 - min(1, 2 * i / n))));
+    end
     
     scaling_heat = (1-progress_smooth_heat) * start_heat + stop_heat * progress_smooth_heat;
     scaling_cool = (1-progress_smooth_cool) * start_cool + stop_cool * progress_smooth_cool;
