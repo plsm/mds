@@ -5,7 +5,7 @@ function [posD, posA, vel] = airflowBeeSimulation (...
   dist = 0.1,              ... speed
   arena_len = 15,          ... rectangular arena approximation
   arena_width = 7,         ... rectangular arena approximation
-  airflow_strength = 0.5
+  airflow_strength = 0.5   ...
   )
   % random angular change of bees
   random_angle = rand (size (posD)) * pi - pi/2;
