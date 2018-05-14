@@ -75,8 +75,8 @@ analyse.simulation.results <- function (
         "graph-%d-stats.png",
         index.graph
       ),
-      width = 200 * dimx,
-      height = 150 * dimy
+      width = 300 * dimx,
+      height = 225 * dimy
     )
     par (
       mfrow = c (dimx, dimy),
@@ -94,6 +94,7 @@ analyse.simulation.results <- function (
     nodes.id <- as.list (nodes.id)
     plot.igraph (
       x = graph.data,
+      vertex.label = NA,
       mark.groups = nodes.id,
       mark.col = "blue",
       layout = graph.layout,
