@@ -42,6 +42,7 @@ def generate_long_dumb_bell (n, pole):
 
 def report (graph):
     matrix = nx.to_numpy_matrix (graph).astype (int)
+    print ('----------------------------------')
     print ('   case XXX')
     print ('      N = [')
     for row in matrix:
@@ -50,5 +51,10 @@ def report (graph):
         print (';')
     print ('      ];')
     print ('      mds = YYY')
+    print ('----------------------------------')
+    for row in matrix:
+        for i, c in enumerate (row.flat):
+            print (c, end = ',' if i + 1 < matrix.shape [0] else '\n')
+    print ('----------------------------------')
     return matrix
 
