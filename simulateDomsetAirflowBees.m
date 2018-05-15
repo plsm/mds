@@ -45,7 +45,8 @@ for i = 1 : n
             if N(iSmaller,iLarger) == 1
                 iPair = iPair + 1;
                 Tsubarena = [T(iSmaller),T(iLarger)];
-                AirSubArena = [air(iSmaller, iLarger), air(iLarger, iSmaller)];
+                %% AirSubArena = [air(iSmaller, iLarger), air(iLarger, iSmaller)];
+                AirSubArena = [air(iSmaller), air(iLarger)];
                 %% move bees k times
                 for iTime = 1 : k
                     [posD(iPair,:),posA(iPair,:),vel(iPair,:)] = airflowBeeSimulation...
@@ -63,10 +64,10 @@ for i = 1 : n
                 end
                 P(iSmaller, iLarger) = mean(pBuff(iSmaller, iLarger, :), 3);
                 P(iLarger, iSmaller) = mean(pBuff(iLarger, iSmaller, :), 3);
-                air (iSmaller, iLarger) = and (T (iSmaller) > criticalTemp, T (iLarger) > criticalTemp);
-                air (iLarger, iSmaller) = air (iSmaller, iLarger);
-                airPump (i, iPair * 2 - 1) = air (iSmaller, iLarger);
-                airPump (i, iPair * 2) = air (iLarger, iSmaller);
+                air(iSmaller, iLarger) = and (T (iSmaller) > criticalTemp, T (iLarger) > criticalTemp);
+                air(iLarger, iSmaller) = air(iSmaller, iLarger);
+                airPump(i, iPair * 2 - 1) = air(iSmaller, iLarger);
+                airPump(i, iPair * 2) = air(iLarger, iSmaller);
             end
         end
     end
@@ -109,6 +110,7 @@ for i = 1 : n
     for c = 1 : length(N)
         T(c,:) = T(c,1);
     end
+    air(:, 1) = max (air, [], 2);
 end
 
 pInt = pInt / n;
