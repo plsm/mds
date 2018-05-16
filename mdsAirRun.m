@@ -24,4 +24,4 @@ correct_percentage = 100 * correct / numberRepeats;
 suboptimal_percentage = 100 * subopt / numberRepeats;
 incorrect_percentage = 100 * incorrect / numberRepeats;
 filename = sprintf ("results-air-graph_%d.csv", indexGraph);
-cell2csv (filename, mat2cell (runInfo, ones (1, numberRepeats), ones (1, 7 + 2 * size (N, 1))));
+cell2csv (filename, mat2cell (runInfo, ones (1, numberRepeats), ones (1, 7 + size (N, 1) + sum (sum (N)))));
